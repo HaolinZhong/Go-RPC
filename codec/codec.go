@@ -23,8 +23,8 @@ const (
 	JSON ContentType = "application/JSON"
 )
 
-var CodecConstructorFactory = make(map[ContentType]NewCodec)
+var CodecConstructorMap = make(map[ContentType]NewCodec)
 
 func init() {
-	CodecConstructorFactory[GOB] = NewGobCodec
+	CodecConstructorMap[GOB] = NewGobCodec
 }

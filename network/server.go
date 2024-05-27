@@ -77,7 +77,7 @@ func (server *Server) ServeConn(conn io.ReadWriteCloser) {
 	}
 
 	// 3. based on content type, get corresponding Codec, and pass the decoding task to Codec
-	newCodecFunc := codec.CodecConstructorFactory[option.ContentType]
+	newCodecFunc := codec.CodecConstructorMap[option.ContentType]
 	if newCodecFunc == nil {
 		log.Printf("rpc server: invalid codec type %s", option.ContentType)
 		return
@@ -137,6 +137,7 @@ func (server *Server) ReadRequestHeader(cc codec.Codec) (*codec.Header, error) {
 func (server *Server) sendResponse(cc codec.Codec, h *codec.Header, body interface{}, sending *sync.Mutex) {
 	sending.Lock()
 	defer sending.Unlock()
+	log.Println("server send response header:", h)
 	if err := cc.Write(h, body); err != nil {
 		log.Println("rpc server: write response error:", err)
 	}
