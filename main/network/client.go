@@ -1,7 +1,7 @@
 package network
 
 import (
-	"Go-RPC/codec"
+	"Go-RPC/main/codec"
 	"encoding/json"
 	"errors"
 	"fmt"
@@ -97,7 +97,7 @@ func (client *Client) send(call *Call) {
 		return
 	}
 
-	client.header.MethodName = call.ServiceMethod
+	client.header.ServiceMethodName = call.ServiceMethod
 	client.header.RequestId = requestId
 	client.header.Error = ""
 

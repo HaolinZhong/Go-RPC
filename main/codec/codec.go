@@ -3,9 +3,9 @@ package codec
 import "io"
 
 type Header struct {
-	MethodName string
-	RequestId  uint64
-	Error      string
+	ServiceMethodName string
+	RequestId         uint64
+	Error             string
 }
 type Codec interface {
 	io.Closer
